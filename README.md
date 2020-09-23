@@ -66,3 +66,65 @@
 ![](./static/overall_comparaison.png)
 
 
+- Scope :
+
+
+    If you ask the phone store employee for a phone model that her store doesn’t carry, she will not be able to sell you the phone you want.
+    She only has access to the phones in her store’s inventory. You’ll have to try another store to see if you can find the phone you’re looking for.
+    Programming has a term for this concept: scope (technically called lexical scope). In JavaScript, each function gets its own scope.
+    Scope is basically a collection of variables as well as the rules for how those variables are accessed by name.
+    Only code inside that function can access that function’s scoped variables.
+
+    -> scope is the local variables and other resources that are accessable just though a function :
+
+    Example :
+
+        function one() {
+            // this `a` only belongs to the `one()` function vara=1;
+            console.log( a );
+        }
+
+        function two() {
+            // this `a` only belongs to the `two()` function vara=2;
+            console.log( a );
+        }
+
+        one(); // 1
+        two(); // 2
+
+
+    - Nested scopes :
+
+    function outer() {
+        var a=1;
+
+        function inner() {
+            var b=2;
+            // we can access both `a` and `b` here
+            console.log( a + b ); // 3
+        }
+
+        inner();
+        // we can only access `a` here
+        console.log( a ); // 1
+
+    }
+
+    outer();
+
+    -> code inside the innermost scope can access variables from either scope.
+
+    #So, code inside the inner() function has access to both variables a and b, but code only in outer()
+     has access only to a—it cannot access b because that variable is only inside inner().
+
+    Recall this code snippet from earlier:
+        const TAX_RATE = 0.08;
+        function calculateFinalPurchaseAmount(amt) { // calculate the new amount with the tax amt = amt + (amt * TAX_RATE);
+                // return the new amount
+        return amt;
+    }
+
+    The TAX_RATE constant (variable) is accessible from inside the calcu lateFinalPurchaseAmount(..) function,
+    even though we didn’t pass it in, because of lexical scope.
+
+
