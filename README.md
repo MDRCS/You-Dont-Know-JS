@@ -461,3 +461,50 @@ II- Into JavaScript :
     -> To summarize: two distinct actions are taken for a variable assignment: First, Compiler declares a variable (if not previously declared) in the current Scope, and second, when executing, Engine looks up the vari‐ able in Scope and assigns to it, if found.
 
 
+    + 'let' keyword:
+
+    The let keyword attaches the variable declaration to the scope of whatever block (commonly a { .. } pair) it’s contained in. In other words, let implicitly hijacks any block’s scope for its variable decla‐ ration.
+
+    var foo = true;
+
+    if (foo) {
+        letbar=foo*2;
+        bar = something( bar );
+        console.log( bar );
+    }
+
+    console.log( bar ); // ReferenceError
+
+    + var vs let vs const :
+
+    - var declarations are globally scoped or function scoped while let and const are block scoped.
+    - var variables can be updated and re-declared within its scope; let variables can be updated but not re-declared; const variables can neither be updated nor re-declared.
+    - They are all hoisted to the top of their scope. But while var variables are initialized with undefined, let and const variables are not initialized.
+    - While var and let can be declared without being initialized, const must be initialized during declaration.
+
+    - Binding i as a variable :
+
+    for (let i=0; i<10; i++) {
+        console.log( i );
+    }
+
+    console.log( i ); // ReferenceError
+
+    - Check the difference between const and var for scopes :
+
+    In addition to let, ES6 introduces const, which also creates a block- scoped variable, but whose value is fixed (constant). Any attempt to change that value at a later time results in an error.
+    var foo = true;
+
+    if (foo) {
+
+        var a=2;
+        const b = 3;
+        // block-scoped to the containing `if`
+        a = 3; // just fine!
+        b = 4; // error!
+    }
+
+    console.log( a ); // 3
+    console.log( b ); // ReferenceError!
+
+
