@@ -108,7 +108,7 @@ I- Intro to programming :
         // we can only access `a` here
         console.log( a ); // 1
 
-    }
+        }
 
     outer();
 
