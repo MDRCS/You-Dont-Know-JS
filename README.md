@@ -96,7 +96,7 @@ I- Intro to programming :
 
     =+ Nested scopes :
 
-    
+
         function outer() {
                 var a=1;
 
@@ -122,8 +122,8 @@ I- Intro to programming :
 
             Recall this code snippet from earlier:
                 const TAX_RATE = 0.08;
-                function calculateFinalPurchaseAmount(amt) { 
-                        // calculate the new amount with the tax 
+                function calculateFinalPurchaseAmount(amt) {
+                        // calculate the new amount with the tax
                         amt = amt + (amt * TAX_RATE);
                         // return the new amount
                 return amt;
@@ -175,8 +175,8 @@ II- Into JavaScript :
                     Only values have types in JavaScript; variables are just simple con‐ tainers for those values.
 
     - Objects
-    
-    
+
+
             The object type refers to a compound value where you can set properties (named locations) that each hold their own values of any type.
             This is perhaps one of the most useful value types in all of Java‐ Script:
 
@@ -207,7 +207,7 @@ II- Into JavaScript :
             obj["b"]; // 42
 
     + Arrays
-    
+
             An array is an object that holds values (of any type) not particularly in named properties/keys, but rather in numerically indexed posi‐ tions. For                 example:
             vararr=[
                 "hello world",
@@ -227,7 +227,7 @@ II- Into JavaScript :
             The best and most natural approach is to use arrays for numerically positioned values and use objects for named properties.
 
     + Functions
-    
+
             The other object subtype you’ll use all over your JS programs is a function:
 
             function foo() {
@@ -347,8 +347,8 @@ II- Into JavaScript :
             2. When we call plusOne(3), it adds 3 (its inner y) to the 1 (remembered by x), and we get 4 as the result.
 
     + Modules
-    
-    
+
+
             The most common usage of closure in JavaScript is the module pat‐ tern. Modules let you define private implementation details (vari‐ ables, functions)             that are hidden from the outside world,
             as well as a public API that is accessible from the outside.
 
@@ -375,7 +375,7 @@ II- Into JavaScript :
 
     + 'this' Identifier :
 
-    
+
             It’s important to realize that this does not refer to the function itself, as is the most common misconception.
             Here’s a quick illustration:
 
@@ -429,5 +429,27 @@ II- Into JavaScript :
 
             The a property doesn’t actually exist on the bar object, but because bar is prototype-linked to foo, JavaScript
             automatically falls back to looking for a on the foo object, where it’s found.
+
+# - Scopes & Closures [You-Dont-Know-JS]
+
+    - Compiler Theory :
+
+    In traditional compiled-language process, a chunk of source code, your program, will undergo typically three steps before it is executed, roughly called “compilation”:
+
+    Tokenizing/Lexing
+    Breaking up a string of characters into meaningful (to the lan‐ guage) chunks, called tokens. For instance, consider the program var a = 2;. This program would likely be broken up into the following tokens: var, a, =, 2, and ;.
+    Whitespace may or may not be persisted as a token, depending on whether its meaningful or not.
+    The difference between tokenizing and lexing is subtle and academic, but it centers on whether or not these tokens are identified in a stateless or stateful way. Put simply, if the tokenizer were to invoke stateful parsing rules to fig‐ ure out
+    whether a should be considered a distinct token or just part of another token, that would be lexing.
+
+    Parsing
+    taking a stream (array) of tokens and turning it into a tree of nested elements, which collectively represent the grammatical structure of the program. This tree is called an “AST” (abstract syntax tree).
+    The tree for var a = 2; might start with a top-level node called VariableDeclaration, with a child node called Identifier (whose value is a), and another child called AssignmentExpres sion, which itself has a child called NumericLiteral (whose value is 2).
+
+    Code-Generation
+    The process of taking an AST and turning it into executable code. This part varies greatly depending on the language, the platform it’s targeting, and so on.
+    So, rather than get mired in details, we’ll just handwave and say that there’s a way to take our previously described AST for var a = 2; and turn it into a set of machine instructions to actually create
+    a variable called a (including reserving memory, etc.), and then store a value into a.
+
 
 
