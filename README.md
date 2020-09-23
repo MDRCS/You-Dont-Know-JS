@@ -92,7 +92,6 @@ I- Intro to programming :
         one(); // 1
         two(); // 2
 
-
     - Nested scopes :
 
     function outer() {
