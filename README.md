@@ -451,5 +451,13 @@ II- Into JavaScript :
     So, rather than get mired in details, we’ll just handwave and say that there’s a way to take our previously described AST for var a = 2; and turn it into a set of machine instructions to actually create
     a variable called a (including reserving memory, etc.), and then store a value into a.
 
+    - How a compiler will handle scope in the memory :
+
+    Compiler will instead proceed as:
+
+    1. Encountering var a, Compiler asks Scope to see if a variable a already exists for that particular scope collection. If so, Compiler ignores this declaration and moves on. Otherwise, Compiler asks Scope to declare a new variable called a for that scope collection.
+    2. Compiler then produces code for Engine to later execute, to han‐ dle the a = 2 assignment. The code Engine runs will first ask Scope if there is a variable called a accessible in the current scope col‐ lection. If so, Engine uses that variable. If not, Engine looks else‐ where
+
+    -> To summarize: two distinct actions are taken for a variable assignment: First, Compiler declares a variable (if not previously declared) in the current Scope, and second, when executing, Engine looks up the vari‐ able in Scope and assigns to it, if found.
 
 
