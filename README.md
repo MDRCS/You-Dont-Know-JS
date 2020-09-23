@@ -1,6 +1,6 @@
 # - Getting started with javascript [You-Dont-Know-JS]
 
-- Intro to programming :
+I- Intro to programming :
 
 
         > age = prompt( "Please tell me your age:" );
@@ -127,4 +127,157 @@
     The TAX_RATE constant (variable) is accessible from inside the calcu lateFinalPurchaseAmount(..) function,
     even though we didn’t pass it in, because of lexical scope.
 
+
+II- Into JavaScript :
+
++ Values & Types :
+
+
+    --+ JavaScript has typed values, not typed variables. The following built-in types are available:
+
+    • string
+    • number
+    • boolean
+    • null and undefined • object
+    • symbol (new to ES6)
+
+    JavaScript provides a typeof operator that can examine a value and
+    tell you what type it is:
+
+    var a;
+    typeof a; // "undefined"
+
+    a = "hello world";
+    typeof a; // "string"
+
+    a=42;
+    typeof a; // "number"
+
+    a = true;
+    typeof a; // "boolean"
+
+    a = null;
+    typeof a; // "object"--weird, bug
+
+    a = undefined;
+    typeof a; // "undefined"
+
+    a={b:"c"};
+    typeof a; // "object"
+
+    Notice: how in this snippet the a variable holds every different type of value, and that despite appearances,
+            typeof a is not asking for the “type of a,” but rather for the “type of the value currently in a.”
+            Only values have types in JavaScript; variables are just simple con‐ tainers for those values.
+
+    - Objects
+    The object type refers to a compound value where you can set properties (named locations) that each hold their own values of any type.
+    This is perhaps one of the most useful value types in all of Java‐ Script:
+
+    varobj={
+        a: "hello world",
+        b: 42,
+        c: true
+    };
+
+    obj.a; // "hello world"
+    obj.b; // 42
+    obj.c; // true
+
+    obj["a"]; // "hello world"
+    obj["b"]; // 42
+    obj["c"]; // true
+
+    - Keys of objects :
+
+    var obj={
+        a: "hello world",
+        b: 42
+    };
+
+    var b="a";
+
+    obj[b]; // "hello world"
+    obj["b"]; // 42
+
+    Arrays
+    An array is an object that holds values (of any type) not particularly in named properties/keys, but rather in numerically indexed posi‐ tions. For example:
+    vararr=[
+        "hello world",
+        42,
+        true
+    ];
+
+    arr[0]; // "hello world"
+    arr[1]; // 42
+    arr[2]; // true
+    arr.length; // 3
+
+    typeof arr; // "object"
+
+    + Arrays vs Objects (usage) :
+
+    The best and most natural approach is to use arrays for numerically positioned values and use objects for named properties.
+
+    + Functions
+    The other object subtype you’ll use all over your JS programs is a function:
+
+    function foo() {
+        return 42;
+    }
+
+    foo.bar = "hello world";
+    typeof foo; // "function"
+    typeof foo(); // "number"
+    typeof foo.bar; // "string"
+
+    + Built-In Type Methods :
+
+    For example:
+    var a = "hello world";
+    var b = 3.14159;
+    a.length; // 11
+    a.toUpperCase(); // "HELLO WORLD"
+    b.toFixed(4); // "3.1416"
+
+    - Coercion or type conversion :
+
+    Here’s an example of explicit coercion:
+    var a = "42";
+    var b=Number(a);
+    a; // "42"
+    b; // 42--the number!
+    And here’s an example of implicit coercion:
+    var a = "42";
+    var b = a * 1; // "42" implicitly coerced to 42 here
+    a; // "42"
+    b; // 42--the number!
+
+
+    - Strict Mode :
+
+    You can use strict mode in all your programs. It helps you to write cleaner code, like preventing you from using undeclared variables.
+
+    - Examples :
+
+        "use strict";
+        x = 3.14;       // This will cause an error because x is not declared
+
+        ------------------------------------------------------------------------------
+
+        "use strict";
+        myFunction();
+
+        function myFunction() {
+          y = 3.14;   // This will also cause an error because y is not declared
+        }
+
+        ------------------------------------------------------------------------------
+
+        x = 3.14;       // This will not cause an error.
+        myFunction();
+
+        function myFunction() {
+          "use strict";
+          y = 3.14;   // This will cause an error
+        }
 
