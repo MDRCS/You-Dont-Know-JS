@@ -406,6 +406,15 @@ II- Into JavaScript :
     Bottom line: to understand what this points to, you have to exam‐ ine how the function in question was called.
     It will be one of those four ways just shown, and that will then answer what this is.
 
+    + Prototypes :
 
+    When you reference a property on an object, if that property doesn’t exist, JavaScript will automatically
+    use that object’s internal proto‐ type reference to find another object to look for the property on.
+    You could think of this almost as a fallback if the property is miss‐ ing.
+
+![](./static/prototype.png)
+
+    The a property doesn’t actually exist on the bar object, but because bar is prototype-linked to foo, JavaScript
+    automatically falls back to looking for a on the foo object, where it’s found.
 
 
