@@ -337,4 +337,29 @@ II- Into JavaScript :
     1. When we call makeAdder(1), we get back a reference to its inner add(..) that remembers x as 1. We call this function reference plusOne(..).
     2. When we call plusOne(3), it adds 3 (its inner y) to the 1 (remembered by x), and we get 4 as the result.
 
+    + Modules
+    The most common usage of closure in JavaScript is the module pat‐ tern. Modules let you define private implementation details (vari‐ ables, functions) that are hidden from the outside world,
+    as well as a public API that is accessible from the outside.
+
+    Consider:
+
+    function User(){
+    var username, password;
+        function doLogin(user,pw) {
+            username = user;
+            password = pw;
+            // do the rest of the login work
+        }
+
+        var publicAPI = {
+            login: doLogin
+        };
+    return publicAPI;
+
+    }
+    // create a `User` module instance
+    var fred = User();
+
+    fred.login( "fred", "12Battery34!" );
+
 
