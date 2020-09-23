@@ -281,3 +281,60 @@ II- Into JavaScript :
           y = 3.14;   // This will cause an error
         }
 
+    + Functions as Values :
+
+    This may sound like a strange concept at first, so take a moment to ponder it.
+    Not only can you pass a value (argument) to a function, but a function itself
+    can be a value that’s assigned to variables or passed to or returned from other functions.
+
+    Consider:
+
+    var foo = function() {
+        // ..
+    };
+
+    var x = function bar(){
+        // ..
+    };
+
+    1- The first function expression assigned to the foo variable is called anonymous because it has no name.
+    2- The second function expression is named (bar), even as a reference to it is also assigned to the x variable.
+       Named function expressions are generally more preferable, though anonymous function expressions are still extremely common.
+
+    There’s another way to execute a function expression, which is typi‐ cally referred to as an immediately invoked function expression (IIFE):
+
+    > (function IIFE(){ console.log( "Hello!" );})();
+
+    + Closure :
+
+    -> You can think of closure as a way to “remember” and continue to access a function’s scope (its variables) even once the function has finished running.
+
+
+    Consider:
+
+    function makeAdder(x) {
+    // parameter `x` is an inner variable
+    // inner function `add()` uses `x`, so
+    // it has a "closure" over it
+
+    function add(y) {
+            return y + x;
+        };
+        return add;
+    }
+
+    The reference to the inner add(..) function that gets returned with each call to the outer makeAdder(..) is able to remember whatever x value was passed in to makeAdder(..). Now, let’s use makeAd der(..):
+
+    // `plusOne` gets a reference to the inner `add(..)`
+    // function with closure over the `x` parameter of
+    // the outer `makeAdder(..)`
+    var plusOne = makeAdder( 1 );
+
+    plusOne( 3 ); // 4 <- 3+1
+    plusOne( 41 ); // 42 <- 41+1
+
+    More on how this code works:
+    1. When we call makeAdder(1), we get back a reference to its inner add(..) that remembers x as 1. We call this function reference plusOne(..).
+    2. When we call plusOne(3), it adds 3 (its inner y) to the 1 (remembered by x), and we get 4 as the result.
+
+
