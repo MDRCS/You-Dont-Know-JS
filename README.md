@@ -362,4 +362,50 @@ II- Into JavaScript :
 
     fred.login( "fred", "12Battery34!" );
 
+    + 'this' Identifier :
+
+    It’s important to realize that this does not refer to the function itself, as is the most common misconception.
+    Here’s a quick illustration:
+
+    function foo() {
+        'use strict'
+        console.log( this.bar );
+    }
+
+    var bar = "global";
+
+    var obj1={
+                bar: "obj1",
+                foo: foo
+              };
+    var obj2={ bar: "obj2" };
+
+    // --------
+    foo(); // "global"
+
+    obj1.foo(); // "obj1"
+    foo.call( obj2 ); // "obj2"
+    new foo(); // undefined
+
+    -> 'this' refer to the property that called it. if no one then it will print 'undefined'.
+
+     function foo() {
+        'use strict'
+        console.log( this.bar );
+    }
+
+    foo() -> with strict mode you will get an error "ncaught TypeError: Cannot read property 'bar' of undefined".
+
+    There are four rules for how this gets set, and they’re shown in those last four lines of that snippet:
+    1. foo() ends up setting this to the global object in non-strict mode—in strict mode, this would be undefined
+       and you’d get an error in accessing the bar property—so "global" is the value found for this.bar.
+    2. obj1.foo() sets this to the obj1 object.
+    3. foo.call(obj2) sets this to the obj2 object.
+    4. new foo() sets this to a brand new empty object.
+
+    Bottom line: to understand what this points to, you have to exam‐ ine how the function in question was called.
+    It will be one of those four ways just shown, and that will then answer what this is.
+
+
+
 
