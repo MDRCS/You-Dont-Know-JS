@@ -507,4 +507,88 @@ II- Into JavaScript :
     console.log( a ); // 3
     console.log( b ); // ReferenceError!
 
+    + Closures
+
+    =++ Closure is when a function is able to remember and access its lexical scope even when that function is executing outside its lexical scope.
+
+    function foo() {
+        var a=2;
+        function bar() {
+            console.log( a );
+        }
+        return bar;
+    }
+
+    var baz = foo();
+    baz(); // 2 -- Whoa, closure was just observed, man.
+
+    From a purely academic perspective, what is said of the above snippet is that the function bar() has a closure over the scope of foo()
+    (and indeed, even over the rest of the scopes it has access to, such as the global scope in our case). Put slightly differently,
+    it’s said that bar() closes over the scope of foo(). Why? Because bar() appears nested inside of foo(). Plain and simple.
+
+    - Real example of closures in js:
+
+    function wait(message) {
+        setTimeout( function timer(){ console.log( message );
+        }, 1000 );
+    }
+
+    wait( "Hello, closure!" );
+
+
+
+    + Modules :
+
+    function CoolModule() {
+
+    var something = "cool";
+    var another = [1, 2, 3];
+
+    function doSomething() {
+        console.log( something );
+    }
+
+    function doAnother() {
+        console.log( another.join( " ! " ) );
+    }
+
+        return {
+            doSomething: doSomething,
+            doAnother: doAnother
+        };
+
+    }
+
+    var foo = CoolModule();
+    foo.doSomething(); // cool
+    foo.doAnother(); // 1 ! 2 ! 3
+
+    -> This is the pattern in JavaScript we call module. The most common way of implementing the module pattern is often called revealing module, and it’s the variation we present here.
+
+    1- First, CoolModule() is just a function, but it has to be invoked for there to be a module instance created. Without the execution of the outer function,
+       the creation of the inner scope and the closures would not occur.
+
+     A slight variation on this pattern is when you only care to have one instance, a singleton of sorts:
+
+     var foo = (function CoolModule() { var something = "cool";
+        var another = [1, 2, 3];
+        function doSomething() {
+            console.log( something );
+
+        function doAnother() {
+            console.log( another.join( " ! " ) );
+        }
+            return {
+                doSomething: doSomething,
+                doAnother: doAnother
+            };
+        })();
+
+        foo.doSomething(); // cool foo.doAnother(); // 1 ! 2 ! 3
+     }
+
+    Here, we turned our module function into an IIFE, and we immediately invoked it and assigned its return value directly to our single module instance identifier foo.
+    An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined
+
+
 
