@@ -590,5 +590,38 @@ II- Into JavaScript :
     Here, we turned our module function into an IIFE, and we immediately invoked it and assigned its return value directly to our single module instance identifier foo.
     An IIFE (Immediately Invoked Function Expression) is a JavaScript function that runs as soon as it is defined
 
+    + Import modules in other files :
 
+    ES6 modules do not have an “inline” format, they must be defined in separate files (one per module). The browsers/engines have a default “module loader” (which is overridable,
+    but that’s well-beyond our dis‐ cussion here), which synchronously loads a module file when it’s im‐ ported.
 
+    Consider:
+
+    bar.js
+    function hello(who) {
+        return "Let me introduce: " + who;
+    }
+
+    export hello;
+
+    foo.js
+    // import only `hello()` from the "bar" module
+    import hello from "bar";
+    var hungry = "hippo";
+    function awesome() {
+        console.log(
+                hello( hungry ).toUpperCase()
+            );
+    }
+
+    export awesome;
+
+    baz.js
+
+    // import the entire "foo" and "bar" modules
+    module foo from "foo";
+    module bar from "bar";
+
+    console.log(
+        bar.hello( "rhino" )
+    ); // Let me introduce: rhino foo.awesome(); // LET ME INTRODUCE: HIPPO
