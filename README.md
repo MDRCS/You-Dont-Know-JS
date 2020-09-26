@@ -625,3 +625,89 @@ II- Into JavaScript :
     console.log(
         bar.hello( "rhino" )
     ); // Let me introduce: rhino foo.awesome(); // LET ME INTRODUCE: HIPPO
+
+# - this & object, prototypes [You-Dont-Know-JS]
+
+    + "this" identifier :
+
+    Let’s try to illustrate the motivation and utility of this:
+    function identify() {
+        return this.name.toUpperCase();
+    }
+
+    function speak() {
+        var greeting = "Hello, I'm " + identify.call( this ); console.log( greeting );
+    }
+
+    var me = {
+        name: "Kyle"
+    };
+
+    var you = {
+        name: "Reader"
+    };
+
+    identify.call( me ); // KYLE
+    identify.call( you ); // READER
+
+    speak.call( me ); // Hello, I'm KYLE
+    speak.call( you ); // Hello, I'm READER
+
+    + Check this example that show how 'this' keyword declaration could gte wrong :
+    - we want to attach a counter to the function to see how many times it was called :
+
+    + wrong declaration :
+
+    function foo(num) {
+        console.log( "foo: " + num );
+        // keep track of how many times `foo` is called
+        this.count++;
+    }
+
+
+    foo.count = 0;
+    var i;
+    for (i=0; i<10; i++) {
+        if(i>5){
+            foo( i );
+        }
+    }
+
+    // foo: 6
+    // foo: 7
+    // foo: 8
+    // foo: 9
+    // how many times was `foo` called?
+
+    console.log( foo.count ); // 0 -- WTF?
+
+    + Good declaration :
+
+    function foo(num) {
+    console.log( "foo: " + num );
+
+    // keep track of how many times `foo` is called
+    // Note: `this` IS actually `foo` now, based on
+    // how `foo` is called (see below)
+
+    this.count++;
+    }
+
+    foo.count = 0;
+    var i;
+
+    for (i=0; i<10; i++) {
+        if(i>5){
+        // using `call(..)`, we ensure the `this`
+        // points at the function object (`foo`) itself
+        foo.call( foo, i ); // Note: `this` IS actually `foo` now, based on
+        }
+    }
+
+    // foo: 6
+    // foo: 7
+    // foo: 8
+    // foo: 9
+    // how many times was `foo` called?
+
+    console.log( foo.count ); // 4
